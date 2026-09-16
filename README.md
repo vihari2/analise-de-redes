@@ -6,6 +6,8 @@ Projeto desenvolvido para Análise de Redes Complexas, utilizando Python e a bib
 
 Foi utilizada a rede social de aves Sociable Weaver, disponibilizada pelo Network Repository.
 
+https://networkrepository.com/aves-weaver-social.php
+
 Arquivo: `aves-weaver-social.edges`
 
 Rossi, Ryan A.; Ahmed, Nesreen K. The Network Data Repository with Interactive Graph Analytics and Visualization. AAAI, 2015.
