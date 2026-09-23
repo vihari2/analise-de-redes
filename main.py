@@ -4,10 +4,10 @@ import igraph as ig
 # ETAPA 1 - IMPORTAÇÃO E LIMPEZA
 # ==========================================
 
-# Caminho do arquivo
+
 arquivo = "aves-weaver-social.edges"
 
-# Ler apenas as duas primeiras colunas
+
 arestas = []
 
 with open(arquivo, "r") as f:
@@ -20,7 +20,7 @@ with open(arquivo, "r") as f:
 
             arestas.append((origem, destino))
 
-# Criar grafo não direcionado
+
 g = ig.Graph.TupleList(
     arestas,
     directed=False
@@ -30,7 +30,6 @@ print("=== GRAFO ORIGINAL ===")
 print("Nós:", g.vcount())
 print("Arestas:", g.ecount())
 
-# Simplificar a rede
 g.simplify(
     loops=True,
     multiple=True
@@ -44,17 +43,15 @@ print("Arestas:", g.ecount())
 # ETAPA 2 - CARACTERIZAÇÃO TOPOLÓGICA
 # ==========================================
 
-# Ordem e tamanho
+
 ordem = g.vcount()
 tamanho = g.ecount()
 
-# Densidade
 densidade = g.density()
 
-# Diâmetro
 diametro = g.diameter()
 
-# Transitividade
+
 transitividade = g.transitivity_undirected()
 
 print("\n=== CARACTERIZAÇÃO TOPOLÓGICA ===")
@@ -75,7 +72,7 @@ print("Transitividade:", transitividade)
 
 degree = g.degree()
 
-# Ordenar os nós pelo grau, do maior para o menor
+
 top_degree = sorted(
     enumerate(degree),
     key=lambda x: x[1],
@@ -97,7 +94,7 @@ for posicao, (indice, valor) in enumerate(top_degree[:5], start=1):
 
 betweenness = g.betweenness()
 
-# Ordenar os nós pela betweenness
+
 top_betweenness = sorted(
     enumerate(betweenness),
     key=lambda x: x[1],
@@ -121,13 +118,13 @@ for posicao, (indice, valor) in enumerate(
 
 import matplotlib.pyplot as plt
 
-# Detectar comunidades usando Louvain
+
 comunidades = g.community_multilevel()
 
 print("\n=== DETECÇÃO DE COMUNIDADES ===")
 print("Número de comunidades:", len(comunidades))
 
-# Mostrar tamanho de cada comunidade
+
 for i, comunidade in enumerate(comunidades, start=1):
     print(f"Comunidade {i}: {len(comunidade)} nós")
 
@@ -136,20 +133,18 @@ for i, comunidade in enumerate(comunidades, start=1):
 # VISUALIZAÇÃO
 # ==========================================
 
-# Layout Fruchterman-Reingold
 layout = g.layout("fr")
 
-# Grau de cada nó
+
 degree = g.degree()
 
-# Tamanho dos nós proporcional ao grau
+
 tamanhos = [
     5 + (d * 2)
     for d in degree
 ]
 
-# Cor de acordo com a comunidade
-# Criar uma cor diferente para cada comunidade
+
 paleta = ig.RainbowPalette(len(comunidades))
 
 cores = [
